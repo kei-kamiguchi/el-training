@@ -3,3 +3,4 @@ class ChangeTasksContentNotNull < ActiveRecord::Migration[5.2]
     change_column_null :tasks, :content, false
   end
 end
+#nullを受け付けない
