@@ -18,4 +18,4 @@
 |status|string|
 ___
 ### herokuを使ったデプロイ
-[herokuを簡単にまとめてみた！](https://tetoracode.hatenablog.com/entry/2020/01/14/004248?_ga=2.45261732.1405383801.1579141739-1727489939.1578576078"参照先")
+[herokuを簡単にまとめてみた！](https://tetoracode.hatenablog.com/entry/2020/01/14/004248?_ga=2.45261732.1405383801.1579141739-1727489939.1578576078
