@@ -1,4 +1,13 @@
-<h2>新規登録</h2>
+<h1>編集</h1>
+
+<% if @task.errors.present? %>
+  <ul id='error_explanation'>
+    <% @task.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model: @task, local: true do |form| %>
   <%= form.label :title %>
   <%= form.text_field :title %>
