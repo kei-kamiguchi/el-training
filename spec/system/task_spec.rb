@@ -1,12 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe 'タスク管理機能', type: :system do
+  before(:each) do
+    # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
+    FactoryBot.create(:task)
+    FactoryBot.create(:second_task)
+  end
+
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示されること' do
-        task=FactoryBot.create(:task, title: 'task')
         visit tasks_path
-        expect(page).to have_content 'task'
+        expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
+        expect(page).to have_content 'Factoryで作ったデフォルトのコンテント１'
+        expect(page).to have_content 'Factoryで作ったデフォルトのタイトル２'
+        expect(page).to have_content 'Factoryで作ったデフォルトのコンテント２'
+      end
+    end
+    # ここにテスト内容を追加で記載する
+    context '複数のタスクを作成した場合' do
+      it 'タスクが作成日時の降順に並んでいること'  do
+        new_task = FactoryBot.create(:task, title: 'new_task')
+        visit tasks_path
+        task_list = all('.task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+        expect(task_list[0]).to have_content 'Factoryで作ったデフォルトのタイトル１'
+        expect(task_list[1]).to have_content 'Factoryで作ったデフォルトのタイトル２'
+        expect(task_list[2]).to have_content 'new_task'
       end
     end
   end

@@ -26,6 +26,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to tasks_path, notyice: 'タスクを更新しました'
     else
+      flash.now[:notice]='タスクを更新できません'
       render :tasks
     end
   end
