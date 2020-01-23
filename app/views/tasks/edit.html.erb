@@ -1,4 +1,4 @@
-<h1>編集</h1>
+<h1><%= t('view.edit') %></h1>
 
 <% if @task.errors.present? %>
   <ul id='error_explanation'>
@@ -13,5 +13,5 @@
   <%= form.text_field :title %>
   <%= form.label :content %>
   <%= form.text_area :content %>
-  <%= form.submit nil %>
+  <%= form.submit t('view.update') %>
 <% end %>

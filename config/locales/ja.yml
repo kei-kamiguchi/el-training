@@ -1,5 +1,14 @@
 ---
 ja:
+  view:
+    regist: 登録する
+    new: 新規登録
+    index: 一覧
+    edit: 編集
+    show: 詳細
+    regist: 登録
+    delete: 削除
+    update: 更新
   activerecord:
     errors:
       messages:
