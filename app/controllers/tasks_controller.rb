@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   def index
-    @tasks=Task.all
+    @tasks=Task.all.order(created_at: :asc)
   end
 
   def new
@@ -12,7 +12,6 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to @task, notice: 'タスクを作成しました'
     else
-      flash.now[:notice]='タスクを登録できません'
       render :new
     end
   end
@@ -26,8 +25,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to tasks_path, notyice: 'タスクを更新しました'
     else
-      flash.now[:notice]='タスクを更新できません'
-      render :tasks
+      render :edit
     end
   end
 

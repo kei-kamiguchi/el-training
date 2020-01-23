@@ -17,7 +17,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content 'Factoryで作ったデフォルトのコンテント２'
       end
     end
-    # ここにテスト内容を追加で記載する
+
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいること'  do
         new_task = FactoryBot.create(:task, title: 'new_task')
@@ -36,7 +36,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path(@task)
         fill_in 'task[title]', with: 'タイトル'
         fill_in 'task[content]', with: '詳細'
-        click_on '登録する'
+        click_on '登録'
         expect(page).to have_content 'タイトル'
         expect(page).to have_content '詳細'
       end
