@@ -1,0 +1,12 @@
+<table class='table alt-table-responsive'>
+  <tbody>
+    <tr>
+      <th><%= User.human_attribute_name(:name) %></th>
+      <td><%= @user.name %></td>
+    <tr>
+      <th><%= User.human_attribute_name(:email) %></th>
+      <td><%= @user.email %></td>
+    </tr>
+  </tbody>
+</table>
+<%= link_to 'アカウント変更', edit_user_path(@user), class: 'btn btn-primary' %>

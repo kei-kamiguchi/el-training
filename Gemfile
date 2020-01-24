@@ -78,3 +78,5 @@ gem 'pry-byebug'
 gem 'kaminari'
 gem 'jquery-rails'
 gem 'bootstrap'
+
+gem 'bcrypt', '3.1.11'
