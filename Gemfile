@@ -79,4 +79,4 @@ gem 'kaminari'
 gem 'bootstrap'
 
 #login
-gem 'bcrypt'
+gem 'bcrypt', '3.1.11'
