@@ -1,19 +1,21 @@
 class TasksController < ApplicationController
   def index
     if params[:sort_expired]=='limit'
-      @tasks=Task.all.order(limit: :desc)
+      @tasks=Task.all.limit_sort.page(params[:page])
       return
     end
     if params[:sort_expired]=='priority'
-      @tasks=Task.all.order(priority: :desc)
+      @tasks=Task.all.priority_sort.page(params[:page])
       return
     end
     if params.dig(:task, :title).present? && params.dig(:task, :status).present?
-      @tasks=Task.where("title LIKE ?", "%#{ params[:task][:title] }%").where(status: params[:task][:status])
-    # elsif params.dig(:task, :status).present?
-    #   @tasks=Task.where(status: params[:task][:status])
+      @tasks=Task.where("title LIKE ?", "%#{ params[:task][:title] }%").where(status: params[:task][:status]).page(params[:page])
+    elsif params.dig(:task, :status).present?
+      @tasks=Task.where(status: params[:task][:status]).page(params[:page])
+    elsif params.dig(:task, :title).present?
+      @tasks=Task.where(title: params[:task][:title]).page(params[:page])
     else
-      @tasks=Task.all.order(created_at: :asc)
+      @tasks=Task.all.order(created_at: :asc).page(params[:page])
     end
   end
 
