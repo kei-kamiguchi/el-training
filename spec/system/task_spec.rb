@@ -45,11 +45,12 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '検索に入力した文字を含むタイトルで、選択したステータスと一致するタスクが表示されること' do
         visit tasks_path
         fill_in 'task[title]', with: 'タイトル１'
+        select '未着手', from: 'task_status'
         click_on '検索'
         expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
+        expect(page).to have_content '未着手'
       end
     end
-
   end
 
   describe 'タスク登録画面' do

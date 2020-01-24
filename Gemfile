@@ -76,4 +76,5 @@ gem 'pry-byebug'
 
 #front&view
 gem 'kaminari'
+gem 'jquery-rails'
 gem 'bootstrap'
