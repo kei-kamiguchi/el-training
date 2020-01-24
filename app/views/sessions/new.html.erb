@@ -1,0 +1,11 @@
+<%= form_with scope: :session, url: sessions_path, local: true do |s| %>
+  <div class='form-group'>
+    <%= s.label :email, 'メールアドレス' %>
+    <%= s.text_field :email, class: 'form-control' %>
+  </div>
+  <div class='form-group'>
+    <%= s.label :password, 'パスワード' %>
+    <%= s.password_field :password, class: 'form-control' %>
+  </div>
+  <%= s.submit 'ログイン', class: 'btn btn-primary' %>
+<% end %>

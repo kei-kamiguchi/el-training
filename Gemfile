@@ -77,3 +77,6 @@ gem 'pry-byebug'
 #front&view
 gem 'kaminari'
 gem 'bootstrap'
+
+#login
+gem 'bcrypt'
