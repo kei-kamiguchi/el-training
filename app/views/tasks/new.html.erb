@@ -17,6 +17,9 @@
     <%= form.label :content %>
     <%= form.text_area :content %>
   </div>
+  <div class='priority'>
+    <%= form.select :priority, [['底', 1], ['中', 2], ['高', 3]] %>
+  </div>
   <div class='limit'>
     <%= form.datetime_select :limit, {include_blank: true, start_year: 2020,  use_month_numbers: true}, class: 'time-box' %>
   </div>

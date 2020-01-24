@@ -11,7 +11,8 @@ ja:
     update: 更新
     not_yet: 未着手
     search: 検索
-    limit_sort: 終了期限が遅い順に並び替え
+    limit_sort: 終了期限でソートする
+    priority_sort: 優先順位が高い順
   activerecord:
     errors:
       messages:
@@ -26,6 +27,8 @@ ja:
         title: タイトル
         content: 詳細
         limit: 終了期限
+        status: ステータス
+        priority: 優先度
   date:
     abbr_day_names:
     - 日

@@ -28,6 +28,28 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[2]).to have_content 'new_task'
       end
     end
+
+    context '「終了期限が遅い順」のボタンが押された場合' do
+      it '終了期限が遅い順にタスクが表示されること' do
+        new_task = FactoryBot.create(:task, title: 'new_task', limit: '{1i: "2040", 2i: "3", 3i: "5", 4i: "03", 5i: "02"}')
+        visit tasks_path
+        click_on '終了期限でソートする'
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content 'new_task'
+        expect(task_list[1]).to have_content 'Factoryで作ったデフォルトのタイトル２'
+        expect(task_list[2]).to have_content 'Factoryで作ったデフォルトのタイトル１'
+      end
+    end
+
+    context '「検索」のボタンが押された場合' do
+      it '検索に入力した文字を含むタイトルで、選択したステータスと一致するタスクが表示されること' do
+        visit tasks_path
+        fill_in 'task[title]', with: 'タイトル１'
+        click_on '検索'
+        expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
+      end
+    end
+
   end
 
   describe 'タスク登録画面' do

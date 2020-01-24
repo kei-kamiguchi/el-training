@@ -18,7 +18,10 @@
     <%= form.text_area :content %>
   </div>
   <div class='status'>
-    <%= form.select :status, [['未着手', 1], ['着手中', 2], ['完了', 3]] %>
+    <%= form.select :status, [['未着手'], ['着手中',], ['完了']], {include_blank: '選択'} %>
+  </div>
+  <div class='priority'>
+    <%= form.select :priority, [['底', 1], ['中', 2], ['高', 3]] %>
   </div>
   <%= form.submit t('view.update') %>
 <% end %>
