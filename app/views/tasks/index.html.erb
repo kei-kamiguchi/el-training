@@ -1,30 +1,42 @@
-<h1><%= t('view.index') %></h1>
+<h3><%= t('view.index') %></h3>
 
 <div class='sort'>
   <%= form_with model: Task.new, method: :get, local: true, url: tasks_path do |f| %>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-    <%= f.label :status %>
-    <%= f.select :status, [['未着手'], ['着手中'], ['完了']], {include_blank: '選択'} %>
+    <div class='form-group row'>
+      <%= f.label :title, class: 'col-sm-3 col-form-label' %>
+      <div class='col-sm-7'>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+      <div class='col-sm-2'>
+        <%= f.select :status, [['未着手'], ['着手中'], ['完了']], {include_blank: '選択'}, class: 'form-control' %>
+      </div>
+    </div>
     <%= f.hidden_field :search, value: 'true' %>
-    <%= f.submit t('view.search') %>
+    <%= f.submit t('view.search'), class: 'btn btn-primary mb-3' %>
   <% end %>
 </div>
 
-<%= link_to t('view.limit_sort'), tasks_path(sort_expired: "limit") %>
-<%= link_to t('view.priority_sort'), tasks_path(sort_expired: "priority") %>
+<div class='sort-nav'>
+  <%= link_to t('view.limit_sort'), tasks_path(sort_expired: "limit"), class: 'btn btn-outline-secondary' %>
+  <%= link_to t('view.priority_sort'), tasks_path(sort_expired: "priority"), class: 'btn btn-outline-secondary' %>
+</div>
 
-<% @tasks&.each do |task| %>
-  <div class='task_row'>
-    <%= link_to task.title, task_path(task), name: t('view.show') %>
-  </div>
-  <%= task.content %>
-  <%= task.status %>
-  <%= ['低','中','高'][task.priority] %>
-  <%= task.limit.strftime("%Y年%-m月%-d日 %a") %>
-  <%= link_to t('view.delete'), task, method: :delete %>
-  <%= link_to t('view.edit'), edit_task_path(task) %>
-<% end %>
-
-<%= paginate @tasks %>
-<%= page_entries_info @tasks %>
+<div class='main'>
+  <% @tasks&.each do |task| %>
+    <div class='task_row'>
+      <%= link_to task.title, task_path(task), name: t('view.show') %>
+    </div>
+    <%= task.content %>
+    <%= task.status %>
+    <%= ['低','中','高'][task.priority] %>
+    <% weeks = ["月","火","水","木","金","土","日"] %>
+    <% index = task.limit.strftime("%u").to_i %>
+    <%= task.limit.strftime("%Y年%-m月%-d日 #{weeks[index - 1]}曜日") %>
+    <%= link_to t('view.delete'), task, method: :delete %>
+    <%= link_to t('view.edit'), edit_task_path(task) %>
+  <% end %>
+</div>
+<div class='page-nation'>
+  <%= paginate @tasks %>
+  <%= page_entries_info @tasks %>
+</div>

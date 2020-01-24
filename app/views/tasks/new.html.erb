@@ -1,4 +1,4 @@
-<h1><%= t('view.new') %></h1>
+<h3><%= t('view.new') %></h3>
 
 <% if @task.errors.present? %>
   <ul id='error_explanation'>
@@ -9,19 +9,19 @@
 <% end %>
 
 <%= form_with model: @task, local: true do |form| %>
-  <div class='title'>
+  <div class='form-group'>
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: 'form-control' %>
   </div>
-  <div class='content'>
+  <div class='form-group'>
     <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, class: 'form-control' %>
   </div>
-  <div class='priority'>
-    <%= form.select :priority, [['底', 0], ['中', 1], ['高', 2]] %>
+  <div class='form-group'>
+    <%= form.select :priority, [['底', 0], ['中', 1], ['高', 2]], class: 'form-control' %>
   </div>
-  <div class='limit'>
-    <%= form.datetime_select :limit, {include_blank: true, start_year: 2020,  use_month_numbers: true}, class: 'time-box' %>
+  <div class='form-group'>
+    <%= form.datetime_select :limit, {include_blank: true, use_month_numbers: true, selected: Date.today}, class: 'time-box' %>
   </div>
-  <%= form.submit t('view.regist') %>
+  <%= form.submit t('view.regist'), class: 'btn btn-primary' %>
 <% end %>

@@ -1,3 +1,8 @@
-<h2><%= t('view.show') %></h2>
-<%= @task.title %>
-<%= @task.content %>
+<h3><%= t('view.show') %></h3>
+<h4><%= @task.title %></h4>
+<p><%= @task.content %></p>
+<p><%= @task.status %></p>
+<p><%= ['低','中','高'][@task.priority] %></p>
+<% weeks = ["月","火","水","木","金","土","日"] %>
+<% index = @task.limit.strftime("%u").to_i %>
+<p><%= @task.limit.strftime("%Y年%-m月%-d日 #{weeks[index - 1]}曜日") %></p>
