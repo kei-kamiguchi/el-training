@@ -1,4 +1,4 @@
-<h1><%= t('view.edit') %></h1>
+<h3><%= t('view.edit') %></h3>
 
 <% if @task.errors.present? %>
   <ul id='error_explanation'>
@@ -9,9 +9,24 @@
 <% end %>
 
 <%= form_with model: @task, local: true do |form| %>
-  <%= form.label :title %>
-  <%= form.text_field :title %>
-  <%= form.label :content %>
-  <%= form.text_area :content %>
-  <%= form.submit t('view.update') %>
+  <div class='form-group'>
+    <%= form.label :title %>
+    <%= form.text_field :title, class: 'form-control' %>
+  </div>
+  <div class='form-group'>
+    <%= form.label :content %>
+    <%= form.text_area :content, class: 'form-control' %>
+  </div>
+  <div class='form-group row'>
+    <div class='col-2'>
+      <%= form.select :priority, [['底', 0], ['中', 1], ['高', 2]], class: 'form-control' %>
+    </div>
+    <div class='col-10'>
+      <%= form.select :status, [['未着手'], ['着手中',], ['完了']], {include_blank: '選択'} %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <%= form.datetime_select :limit, {include_blank: true, use_month_numbers: true}, class: 'time-box' %>
+  </div>
+  <%= form.submit t('view.update'), class: 'btn btn-primary' %>
 <% end %>
