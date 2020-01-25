@@ -16,7 +16,7 @@ class TasksController < ApplicationController
     elsif params.dig(:task, :title).present?
       @tasks=current_user.tasks.where(title: params[:task][:title]).page(params[:page])
     else
-      @tasks=current_user.tasks.all.order(created_at: :asc).page(params[:page])
+      @tasks=current_user.tasks.all.order(created_at: :desc).page(params[:page])
     end
   end
 
