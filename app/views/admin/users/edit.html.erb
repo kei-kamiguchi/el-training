@@ -1,4 +1,4 @@
-<h1>アカウント登録</h1>
+<h3><%= t('view.admin_edit') %></h3>
 
 <% if @user&.errors.present? %>
   <ul id='error_explanation'>
@@ -8,7 +8,7 @@
   </ul>
 <% end %>
 
-<%= form_with model: @user, local: true do |u| %>
+<%= form_with model: [:admin, @user], local: true do |u| %>
   <div class='form-group'>
     <%= u.label :name %>
     <%= u.text_field :name, class: 'form-control' %>
@@ -17,7 +17,6 @@
     <%= u.label :email %>
     <%= u.text_field :email, class: 'form-control' %>
   </div>
-  <%= u.hidden_field :admin %>
   <div class='form-group'>
     <%= u.label :password %>
     <%= u.password_field :password, class: 'form-control' %>

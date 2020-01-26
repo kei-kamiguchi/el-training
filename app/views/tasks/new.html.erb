@@ -1,12 +1,14 @@
-<h3><%= t('view.new') %></h3>
+<h3><%= t('view.task_new') %></h3>
 
-<% if @task.errors.present? %>
-  <ul id='error_explanation'>
-    <% @task.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<div class='errer-message'>
+  <% if @task.errors.present? %>
+    <ul id='error_explanation'>
+      <% @task.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
 
 <%= form_with model: @task, local: true do |form| %>
   <div class='form-group'>

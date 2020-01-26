@@ -1,4 +1,4 @@
-<h1>アカウント登録</h1>
+<h3><%= t('view.admin_new') %></h3>
 
 <% if @user&.errors.present? %>
   <ul id='error_explanation'>
@@ -17,7 +17,9 @@
     <%= u.label :email %>
     <%= u.text_field :email, class: 'form-control' %>
   </div>
-  <%= u.hidden_field :admin %>
+  <div class='form-check'>
+    <%= check_box :user, :admin, {class: "check_box"}, true, false %>
+  </div>
   <div class='form-group'>
     <%= u.label :password %>
     <%= u.password_field :password, class: 'form-control' %>
