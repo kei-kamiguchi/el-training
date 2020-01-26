@@ -1,16 +1,19 @@
 <h3><%= t('view.admin_show') %></h3>
 
-<table class='table alt-table-responsive'>
-  <tbody>
-    <tr>
-      <th><%= User.human_attribute_name(:name) %></th>
-      <td><%= @user.name %></td>
-    <tr>
-      <th><%= User.human_attribute_name(:email) %></th>
-      <td><%= @user.email %></td>
-    </tr>
-  </tbody>
-</table>
+<div class='user-data'>
+  <table class='table alt-table-responsive'>
+    <tbody>
+      <tr>
+        <th><%= User.human_attribute_name(:name) %></th>
+        <td><%= @user.name %></td>
+      </tr>
+      <tr>
+          <th><%= User.human_attribute_name(:email) %></th>
+          <td><%= @user.email %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <div class='task-list'>
   <table class='table table-hover'>
@@ -46,5 +49,6 @@
   </table>
 </div>
 
-
-<%= link_to '管理者変更', edit_admin_user_path, class: 'btn btn-info mb-3' %>
+<div class='change_user_info'>
+  <%= link_to '管理者変更', edit_admin_user_path, class: 'btn btn-info mb-3' %>
+</div>

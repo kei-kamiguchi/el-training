@@ -5,10 +5,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user=User.find_by(email: session_params[:email].downcase)
-    if @user && @user.authenticate(session_params[:password])
-      session[:user_id]=@user.id
-      if @user.admin?
+    user=User.find_by(email: session_params[:email].downcase)
+    if user && user.authenticate(session_params[:password])
+      log_in user
+      if user.admin?
         redirect_to admin_users_path, notice: "ログインしました"
       else
         redirect_to tasks_path, notice: "ログインしました"

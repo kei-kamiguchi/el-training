@@ -8,7 +8,8 @@ class UsersController < ApplicationController
   def create
     @user=User.new(user_params)
     if @user.save
-      redirect_to tasks_path, notice: "ユーザー「#{@user.name}」を作成しました"
+      log_in @user
+      redirect_to tasks_path, notice: "ユーザー「#{@user.name}」を作成し、ログインしました"
     else
       render "new"
     end
