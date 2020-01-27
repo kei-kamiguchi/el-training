@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :admin_required
+  # before_action :admin_required
 
   def index
     @user=User.all
@@ -38,10 +38,18 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     @user=User.find(params[:id])
-    if @user.destroy
-      redirect_to admin_users_path, notice: 'ユーザーを削除しました'
+    if @user.admin?
+      if @user.destroy
+        redirect_to admin_users_path, notice: 'ユーザーを削除しました'
+      else
+        redirect_to admin_users_path, notice: 'ユーザーを削除できませんでした'
+      end
     else
-      redirect_to admin_users_path, notice: 'ユーザーを削除できませんでした'
+      if @user.delete
+        redirect_to admin_users_path, notice: 'ユーザーを削除しました'
+      else
+        redirect_to admin_users_path, notice: 'ユーザーを削除できませんでした'
+      end
     end
   end
 

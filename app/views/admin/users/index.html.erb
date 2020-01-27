@@ -14,7 +14,7 @@
       <% @user.each do |user| %>
         <tr>
           <td>
-            <%= link_to user.name, [:admin, user] %>
+            <%= link_to user.name, user %>
           </td>
           <td><%= user.admin ? t('view.admin'): '' %></td>
           <td><%= user.tasks.all.count %></td>
