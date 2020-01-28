@@ -6,6 +6,8 @@ class Task < ApplicationRecord
   validates :priority, presence: true
 
   belongs_to :user
+  has_many :labelings, dependent: :destroy
+  has_many :labels, through: :labelings
 
   scope :limit_sort, -> { order(limit: :desc) }
   scope :priority_sort, -> { order(priority: :desc) }

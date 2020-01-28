@@ -31,6 +31,12 @@
     <div class='form-group'>
       <%= form.datetime_select :limit, {include_blank: true, use_month_numbers: true, selected: Date.today}, class: 'time-box' %>
     </div>
+    <div class='label-form'>
+      <% Label.all.each do |label| %>
+      <%= form.check_box :label_ids, { multiple: true, checked: @task.labels.find_by(id: label.id).present?, include_hidden: false }, label[:id] %>
+      <label class='badge badge-secondary'><%= label.name %></label>
+      <% end %>
+    </div>
     <%= form.submit t('view.regist'), class: 'btn btn-primary' %>
   <% end %>
 </div>

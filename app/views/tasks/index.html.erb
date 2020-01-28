@@ -1,57 +1,44 @@
 <h3><%= t('view.task_index') %></h3>
 
-<div class='search-form'>
+<div class='sort mt-5'>
+  <h5>検索フォーム</h5>
   <%= form_with model: Task.new, method: :get, local: true, url: tasks_path do |f| %>
-    <div class='form-inline ml-auto'>
-      <%= f.label :title, t('view.search_form'), class: 'col-sm-3 col-form-label' %>
-      <%= f.text_field :title, class: 'form-control' %>
-      <%= f.select :status, [['未着手'], ['着手中'], ['完了']], {include_blank: '選択'}, class: 'form-control' %>
-      <%= f.hidden_field :search, value: 'true' %>
-      <%= f.submit t('view.search'), class: 'btn btn-info ml-3' %>
+    <div class='form-group row'>
+      <div class='col-sm-5'>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+      <div class='col-sm-4'>
+        <%= f.select :status, [['未着手'], ['着手中'], ['完了']], {include_blank: 'ステータス検索'}, class: 'form-control' %>
+      </div>
+      <div class='form-group col-sm-3'>
+        <%= f.select :labeling_id, Label.all.map{ |label| [label.name, label.id]}, {include_blank: 'タグ検索'}, class: 'form-control mb-3'%>
+      </div>
     </div>
+    <%= f.hidden_field :search, value: 'true' %>
+    <%= f.submit t('view.search'), class: 'btn btn-primary mb-3' %>
   <% end %>
 </div>
 
-<div class='sort-link mt-3'>
+<div class='sort-nav'>
   <%= link_to t('view.limit_sort'), tasks_path(sort_expired: "limit"), class: 'btn btn-outline-secondary' %>
   <%= link_to t('view.priority_sort'), tasks_path(sort_expired: "priority"), class: 'btn btn-outline-secondary' %>
 </div>
 
-<div class='tasks-list mt-3'>
-  <table class='table table-hover'>
-    <thead class='thead-light'>
-      <tr>
-        <th><%= Task.human_attribute_name(:title) %></th>
-        <th><%= Task.human_attribute_name(:content) %></th>
-        <th><%= Task.human_attribute_name(:status) %></th>
-        <th><%= Task.human_attribute_name(:priority) %></th>
-        <th><%= Task.human_attribute_name(:limit) %></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @tasks&.each do |task| %>
-        <tr class='task_row'>
-          <td><%= link_to task.title.truncate(8), task_path(task), name: t('view.show') %></td>
-          <td><%= task.content.truncate(10) %></td>
-          <td><%= task.status %></td>
-          <td><%= ['低','中','高'][task.priority] %></td>
-          <td>
-            <% weeks = ["月","火","水","木","金","土","日"] %>
-            <% index = task.limit.strftime("%u").to_i %>
-            <%= task.limit.strftime("%Y年%-m月%-d日 #{weeks[index - 1]}曜日") %>
-          </td>
-          <td class='text-right'>
-            <%= link_to t('view.delete'), task, method: :delete, class: 'btn btn-outline-dark btn-sm mb-1' %>
-            <%= link_to t('view.edit'), edit_task_path(task), class: 'btn btn-outline-dark btn-sm mb-1' %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class='main'>
+  <% @tasks&.each do |task| %>
+    <div class='task_row'>
+      <%= link_to task.title, task_path(task), name: t('view.show') %>
+    </div>
+    <%= task.content %>
+    <%= task.status %>
+    <%= ['低','中','高'][task.priority] %>
+    <% weeks = ["月","火","水","木","金","土","日"] %>
+    <% index = task.limit.strftime("%u").to_i %>
+    <%= task.limit.strftime("%Y年%-m月%-d日 #{weeks[index - 1]}曜日") %>
+    <%= link_to t('view.delete'), task, method: :delete %>
+    <%= link_to t('view.edit'), edit_task_path(task) %>
+  <% end %>
 </div>
-
-
-<div class='pagination'>
-  <%= paginate @tasks %>
-</div>
+<!-- <div class='page-nation'>
+  <%# <%= paginate @tasks %> %>
+</div> -->

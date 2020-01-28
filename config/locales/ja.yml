@@ -8,6 +8,8 @@ ja:
     task_index: タスク一覧
     user_new: ユーザー登録
     user_show: プロフィール
+    label_new: ラベル作成
+    label_index: ラベル一覧
     index: 一覧
     edit: ユーザー編集
     show: ユーザー詳細
@@ -53,6 +55,7 @@ ja:
     models:
       task: タスク
       user: ユーザー
+      label: ラベル
     attributes:
       user:
         name: 名前
@@ -66,6 +69,8 @@ ja:
         limit: 終了期限
         status: ステータス
         priority: 優先度
+      label:
+        name: ラベル名
   date:
     abbr_day_names:
     - 日
