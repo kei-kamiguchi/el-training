@@ -29,9 +29,6 @@ class TasksController < ApplicationController
   def create
     @task=current_user.tasks.build(task_params)
     if @task.save
-      # params[:task][:label_ids].each do |label|
-      #   @task.labelings.create(label_id: label)
-      # end
       redirect_to @task, notice: 'タスクを作成しました'
     else
       render :new

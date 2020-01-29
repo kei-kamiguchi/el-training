@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before(:each) do
     current_user=FactoryBot.create(:user)
+    FactoryBot.create(:label)
     FactoryBot.create(:task, user: current_user)
     FactoryBot.create(:second_task, user: current_user)
   end
@@ -49,12 +50,25 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(page).to have_content '未着手'
       end
     end
+
+    context '「検索」のボタンが押された場合' do
+      it '検索ラベルで選択したラベルと一致するタスクが表示されること' do
+        # find("option[value='テスト']").select_option
+        select 'テスト', from: 'task_labeling_id'
+        # find("test").select_option
+        # find("form-group col-sm-3").select
+        # find(".test").click
+        click_on '検索'
+        expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
+        expect(page).not_to have_content 'Factoryで作ったデフォルトのタイトル２'
+      end
+    end
   end
 
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do
       it 'データが保存されること' do
-        click_on '作成'
+        click_on 'タスク作成'
         fill_in 'task[title]', with: 'タイトル'
         fill_in 'task[content]', with: '詳細'
         click_on '登録'
