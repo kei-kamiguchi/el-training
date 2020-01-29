@@ -10,7 +10,7 @@
       <div class='col-sm-4'>
         <%= f.select :status, [['未着手'], ['着手中'], ['完了']], {include_blank: 'ステータス検索'}, class: 'form-control' %>
       </div>
-      <div class='col-sm-3'>  
+      <div class='col-sm-3'>
       <%= f.collection_select :labeling_id, Label.all, :id, :name %>
       </div>
     </div>
@@ -39,6 +39,7 @@
     <%= link_to t('view.edit'), edit_task_path(task) %>
   <% end %>
 </div>
-<!-- <div class='page-nation'>
-  <%# <%= paginate @tasks %> %>
-</div> -->
+
+<div class='page-nation'>
+  <%= paginate @tasks %>
+</div>
