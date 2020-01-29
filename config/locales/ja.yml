@@ -2,17 +2,33 @@
 ja:
   view:
     regist: 登録する
-    new: 新規登録
+    task_new: タスク作成
+    task_edit: タスク編集
+    task_show: タスク詳細
+    task_index: タスク一覧
+    user_new: ユーザー登録
+    user_show: プロフィール
+    label_new: ラベル作成
+    label_index: ラベル一覧
     index: 一覧
-    edit: 編集
-    show: 詳細
+    edit: ユーザー編集
+    show: ユーザー詳細
     regist: 登録
+    new: 新規
+    edit: 編集
     delete: 削除
     update: 更新
     not_yet: 未着手
     search: 検索
+    search_form: 検索フォーム
     limit_sort: 終了期限でソートする
     priority_sort: 優先順位が高い順
+    admin: 有
+    admin_new: 管理者登録
+    admin_index: 管理者一覧
+    admin_edit: 管理者編集
+    admin_show: 管理者詳細
+    task_count: タスク数
   views:
     pagination:
       first: "&laquo; 最初"
@@ -38,13 +54,23 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     models:
       task: タスク
+      user: ユーザー
+      label: ラベル
     attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認
+        admin: 管理者権限
       task:
         title: タイトル
         content: 詳細
         limit: 終了期限
         status: ステータス
         priority: 優先度
+      label:
+        name: ラベル名
   date:
     abbr_day_names:
     - 日

@@ -1,14 +1,17 @@
-<h3><%= t('view.index') %></h3>
+<h3><%= t('view.task_index') %></h3>
 
-<div class='sort'>
+<div class='sort mt-5'>
+  <h5>検索フォーム</h5>
   <%= form_with model: Task.new, method: :get, local: true, url: tasks_path do |f| %>
     <div class='form-group row'>
-      <%= f.label :title, class: 'col-sm-3 col-form-label' %>
-      <div class='col-sm-7'>
+      <div class='col-sm-5'>
         <%= f.text_field :title, class: 'form-control' %>
       </div>
-      <div class='col-sm-2'>
-        <%= f.select :status, [['未着手'], ['着手中'], ['完了']], {include_blank: '選択'}, class: 'form-control' %>
+      <div class='col-sm-4'>
+        <%= f.select :status, [['未着手'], ['着手中'], ['完了']], {include_blank: 'ステータス検索'}, class: 'form-control' %>
+      </div>
+      <div class='col-sm-3'>
+      <%= f.collection_select :labeling_id, Label.all, :id, :name %>
       </div>
     </div>
     <%= f.hidden_field :search, value: 'true' %>
@@ -36,6 +39,7 @@
     <%= link_to t('view.edit'), edit_task_path(task) %>
   <% end %>
 </div>
+
 <div class='page-nation'>
   <%= paginate @tasks %>
 </div>

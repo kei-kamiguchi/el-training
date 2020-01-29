@@ -1,21 +1,24 @@
 class TasksController < ApplicationController
+
   def index
     if params[:sort_expired]=='limit'
-      @tasks=Task.all.limit_sort.page(params[:page])
+      @tasks=current_user.tasks.all.limit_sort.page(params[:page])
       return
     end
     if params[:sort_expired]=='priority'
-      @tasks=Task.all.priority_sort.page(params[:page])
+      @tasks=current_user.tasks.all.priority_sort.page(params[:page])
       return
     end
-    if params.dig(:task, :title).present? && params.dig(:task, :status).present?
-      @tasks=Task.where("title LIKE ?", "%#{ params[:task][:title] }%").where(status: params[:task][:status]).page(params[:page])
-    elsif params.dig(:task, :status).present?
-      @tasks=Task.where(status: params[:task][:status]).page(params[:page])
-    elsif params.dig(:task, :title).present?
-      @tasks=Task.where(title: params[:task][:title]).page(params[:page])
-    else
-      @tasks=Task.all.order(created_at: :asc).page(params[:page])
+    @tasks=current_user.tasks.all.order(created_at: :desc).page(params[:page])
+    if params.dig(:task, :title).present?
+      @tasks=@tasks.where("title LIKE ?", "%#{ params[:task][:title] }%").page(params[:page])
+    end
+    if params.dig(:task, :status).present?
+      @tasks=@tasks.where(status: params[:task][:status]).page(params[:page])
+    end
+    if params.dig(:task, :labeling_id).present?
+      @task_labels = Labeling.where(label_id: params[:task][:labeling_id]).pluck(:task_id)
+      @tasks=@tasks.where(id: @task_labels)
     end
   end
 
@@ -24,7 +27,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task=Task.new(task_params)
+    @task=current_user.tasks.build(task_params)
     if @task.save
       redirect_to @task, notice: 'タスクを作成しました'
     else
@@ -58,6 +61,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :content, :limit, :status, :priority)
+    params.require(:task).permit(:title, :content, :limit, :status, :priority, label_ids: [])
   end
 end

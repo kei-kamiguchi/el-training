@@ -1,0 +1,34 @@
+<h3><%= t('view.admin_edit') %></h3>
+
+<% if @user&.errors.present? %>
+  <ul id='error_explanation'>
+    <% @user.errors.full_messages.each  do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class='form user-edit-form'>
+  <%= form_with model: [:admin, @user], local: true do |u| %>
+  <div class='form-group'>
+    <%= u.label :name %>
+    <%= u.text_field :name, class: 'form-control' %>
+  </div>
+  <div class='form-group'>
+    <%= u.label :email %>
+    <%= u.text_field :email, class: 'form-control' %>
+  </div>
+  <div class='form-check'>
+    <%= check_box :user, :admin, {class: "check_box"}, true, false %>
+  </div>
+  <div class='form-group'>
+    <%= u.label :password %>
+    <%= u.password_field :password, class: 'form-control' %>
+  </div>
+  <div class='form-group'>
+    <%= u.label :password_confirmation %>
+    <%= u.password_field :password_confirmation, class: 'form-control' %>
+  </div>
+  <%= u.submit nil, class: 'btn btn-primary' %>
+  <% end %>
+</div>

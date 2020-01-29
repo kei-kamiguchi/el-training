@@ -1,8 +1,33 @@
-<h3><%= t('view.show') %></h3>
-<h4><%= @task.title %></h4>
-<p><%= @task.content %></p>
-<p><%= @task.status %></p>
-<p><%= ['低','中','高'][@task.priority] %></p>
-<% weeks = ["月","火","水","木","金","土","日"] %>
-<% index = @task.limit.strftime("%u").to_i %>
-<p><%= @task.limit.strftime("%Y年%-m月%-d日 #{weeks[index - 1]}曜日") %></p>
+<h3><%= t('view.task_show') %></h3>
+
+
+<div class='task-data'>
+  <table class='table alt-table-responsive'>
+    <tbody>
+      <tr>
+        <th><%= Task.human_attribute_name(:title) %></th>
+        <td><%= @task.title %></td>
+      </tr>
+      <tr>
+          <th><%= Task.human_attribute_name(:content) %></th>
+          <td><%= @task.content %></td>
+      </tr>
+      <tr>
+        <th><%= Task.human_attribute_name(:status) %></th>
+        <td><%= @task.status %></td>
+      </tr>
+      <tr>
+        <th><%= Task.human_attribute_name(:priority) %></th>
+        <td><%= ['低','中','高'][@task.priority] %></td>
+      </tr>
+      <tr>
+        <th><%= Task.human_attribute_name(:limit) %></th>
+        <td>
+          <% weeks = ["月","火","水","木","金","土","日"] %>
+          <% index = @task.limit.strftime("%u").to_i %>
+          <%= @task.limit.strftime("%Y年%-m月%-d日 #{weeks[index - 1]}曜日") %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
