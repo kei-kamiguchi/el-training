@@ -29,7 +29,7 @@
     <tr>
       <th>タイトル</th>
       <th>ステータス</th>
-      <th>優先度</th>
+      <th class="{sorter:'metadata'}">優先度</th>
       <th>終了期限</th>
       <th></th>
       <th></th>
@@ -39,7 +39,7 @@
     <tr>
       <td><%= link_to task.title, task_path(task), name: t('view.show') %></td>
       <td><%= task.status %></td>
-      <td><%= ['低','中','高'][task.priority] %></td>
+      <td class="{sortValue: <%= task.priority %> }"><%= ['低','中','高'][task.priority] %></td>
       <% weeks = ["月","火","水","木","金","土","日"] %>
       <% index = task.limit.strftime("%u").to_i %>
       <td><%= task.limit.strftime("%Y年%-m月%-d日 #{weeks[index - 1]}曜日") %></td>
