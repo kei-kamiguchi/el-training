@@ -11,7 +11,7 @@
         <%= f.select :status, [['未着手'], ['着手中'], ['完了']], {include_blank: 'ステータス検索'}, class: 'form-control' %>
       </div>
       <div class='col-sm-3'>
-      <%= f.collection_select :labeling_id, Label.all, :id, :name %>
+      <%= f.collection_select :labeling_id, Label.all, :id, :name, { include_blank: true } %>
       </div>
     </div>
     <%= f.hidden_field :search, value: 'true' %>

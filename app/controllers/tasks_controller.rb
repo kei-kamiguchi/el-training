@@ -1,15 +1,13 @@
 class TasksController < ApplicationController
 
   def index
+    @tasks=current_user.tasks.all.order(created_at: :desc).page(params[:page])
     if params[:sort_expired]=='limit'
       @tasks=current_user.tasks.all.limit_sort.page(params[:page])
-      return
     end
     if params[:sort_expired]=='priority'
       @tasks=current_user.tasks.all.priority_sort.page(params[:page])
-      return
     end
-    @tasks=current_user.tasks.all.order(created_at: :desc).page(params[:page])
     if params.dig(:task, :title).present?
       @tasks=@tasks.where("title LIKE ?", "%#{ params[:task][:title] }%").page(params[:page])
     end
