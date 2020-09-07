@@ -24,7 +24,7 @@
   <%= link_to t('view.priority_sort'), tasks_path(sort_expired: "priority"), class: 'btn btn-outline-secondary' %>
 </div>
 
-<table class="table">
+<table  id="myTable" class="tablesorter">
   <thead class="thead-light">
     <tr>
       <th>タイトル</th>
@@ -52,3 +52,19 @@
 <div class='page-nation'>
   <%= paginate @tasks %>
 </div>
+
+<script>
+$(document).ready(function()
+    {
+        $("#myTable").tablesorter({
+     headers: {
+       0: {sorter:false},
+       1: {sorter:false},
+       4: {sorter:false},
+       5: {sorter:false}
+     }
+        });
+    }
+
+);
+</script>
